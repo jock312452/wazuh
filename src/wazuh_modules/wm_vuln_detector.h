@@ -185,6 +185,23 @@ typedef struct update_node {
     unsigned int json_format:1;
 } update_node;
 
+typedef struct vu_alerts_node {
+    char *package_version;
+    char *version_compare;
+    char *alert_body;
+    struct vu_alerts_node *next;
+    struct vu_alerts_node *prev;
+} vu_alerts_node;
+
+typedef struct vu_processed_alerts {
+    char *cve;
+    char *package;
+    char *header;
+    int queue;
+    vu_alerts_node *report_queue;
+    vu_alerts_node *discarded_queue;
+} vu_processed_alerts;
+
 typedef struct wm_vuldet_t {
     update_node *updates[OS_SUPP_SIZE];
     unsigned long detection_interval;
